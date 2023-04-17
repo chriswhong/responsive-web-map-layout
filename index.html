@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Web Map Layout</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
+    <style>
+        html,
+        head,
+        body,
+        #main-container {
+            height: 100%;
+            width: 100%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        nav {
+            padding: 1rem;
+            border-bottom: 1px solid #000;
+            display: flex;
+        }
+
+        .nav-links {
+            flex-grow: 1;
+            justify-content: end;
+            display: flex;
+        }
+
+        .nav-link {
+            display: inline-block;
+            font-size: .9rem;
+        }
+
+        #content-container {
+            flex-grow: 1;
+            display: flex;
+            min-height: 0;
+        }
+
+        #sidebar {
+            width: 348px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            overflow-y: scroll;
+            box-sizing: border-box;
+        }
+
+        #map {
+            height: 100%;
+            flex-grow: 1;
+        }
+
+        .title {
+            font-weight: 600;
+        }
+
+        @media only screen and (max-width: 800px) {
+            #content-container {
+                flex-direction: column-reverse;
+            }
+
+            #map {
+                height: 60%;
+                flex-shrink: 0;
+            }
+
+            #sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-container">
+        <nav>
+            <div class="title">Responsive Map</div>
+            <div class="nav-links">
+                <a class="nav-link" href="https://github.com/chriswhong/responsive-web-map-layout" target="_blank"
+                    rel="noopener noreferrer">Github</a>
+            </div>
+
+        </nav>
+        <div id="content-container">
+            <div id="sidebar">
+                <p>This is a simple, responsive layout template for web mapping projects. It can save you some time scaffolding your project so you can focus on everything else.</p>
+                <p>It's fullscreen, and features a top nav, fixed-width sidebar, and main map area.</p>
+                <p>This sidebar will scroll if its content becomes longer than the map.</p>
+                <p>On mobile devices, the orientation of the sidebar and map containers changes to a column, with the
+                    map on top taking 60% of the height, and the sidebar on the bottom.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium diam ac ex malesuada, vel
+                    commodo ligula porttitor. Aenean blandit tellus et nisl suscipit bibendum at at nunc. Mauris
+                    sagittis porttitor convallis. Duis eget maximus ipsum. In cursus ornare dictum. Quisque enim ex,
+                    sagittis non turpis ac, ornare ullamcorper nibh. Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in
+                    faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget risus vel magna varius commodo
+                    eu eu quam. Nam sed sagittis justo, vitae placerat felis. Sed sed congue purus. Sed hendrerit tortor
+                    augue, vitae pellentesque ex ornare molestie.</p>
+                <p>Vestibulum ultricies urna nec maximus facilisis. Morbi ut suscipit augue, non suscipit felis. Etiam
+                    aliquam molestie auctor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos. Proin ac cursus neque, in semper ante. Nullam purus velit, vestibulum quis
+                    dictum ac, elementum dapibus metus. Integer feugiat luctus quam in auctor. Etiam eu laoreet tortor.
+                    Vivamus sit amet finibus elit. Suspendisse vel varius dolor, ac egestas mauris.</p>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY3dob25nIiwiYSI6IjAyYzIwYTJjYTVhMzUxZTVkMzdmYTQ2YzBmMTM0ZDAyIn0.owNd_Qa7Sw2neNJbK6zc1A';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-74.5, 40],
+            zoom: 2
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+    </script>
+
+</body>
+
+</html>
